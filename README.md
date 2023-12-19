@@ -1,4 +1,4 @@
-# Dictionary Web App
+# Dictionary Web App (Under work, play sound button)
 
 Search unfamiliar words, learn and add them to your vocabulary!
 
