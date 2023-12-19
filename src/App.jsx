@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { FaCirclePlay } from 'react-icons/fa6';
-import PlaceholderLoading from 'react-placeholder-loading';
+import Loading from './Loading';
 
 function App() {
   const [wordSearch, setWordSearch] = useState('');
@@ -13,8 +13,7 @@ function App() {
 
     async function fetchDictionary() {
       if (wordSearch === '' || wordSearch.length <= 2) {
-        setData({});
-        return;
+        return setData({});
       }
 
       try {
@@ -61,15 +60,9 @@ function App() {
         />
       </section>
 
-      {loading && (
-        <div className="flex flex-col items-center gap-2">
-          <PlaceholderLoading shape="rect" width={800} height={30} />
-          <PlaceholderLoading shape="rect" width={800} height={30} />
-          <PlaceholderLoading shape="rect" width={800} height={30} />
-          <PlaceholderLoading shape="rect" width={800} height={30} />
-        </div>
-      )}
-      {!loading && (
+      {loading ? (
+        <Loading />
+      ) : (
         <>
           <section className="flex w-full items-center justify-between">
             <div>

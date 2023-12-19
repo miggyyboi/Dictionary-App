@@ -9,4 +9,4 @@ Search unfamiliar words, learn and add them to your vocabulary!
 - [Tailwind CSS](https://tailwindcss.com/)
 
 ### Project Preview
-![Project Preview](/public/app-preview.png)
+![Project Preview](/public/preview.png)
