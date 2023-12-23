@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { FaCirclePlay } from 'react-icons/fa6';
 import Loading from './Loading';
 
 function App() {
-  const [wordSearch, setWordSearch] = useState('');
+  const searchWord = useRef()
   const [data, setData] = useState({});
   const [loading, setLoading] = useState(false);
 
@@ -12,7 +12,7 @@ function App() {
     const signal = controller.signal;
 
     async function fetchDictionary() {
-      if (wordSearch === '' || wordSearch.length <= 2) {
+      if (!searchWord.current?.value || searchWord.current?.value <= 2) {
         return setData({});
       }
 
@@ -22,7 +22,7 @@ function App() {
           /* from front-end mentor */
         }
         const res = await fetch(
-          `https://api.dictionaryapi.dev/api/v2/entries/en/${wordSearch}`,
+          `https://api.dictionaryapi.dev/api/v2/entries/en/${searchWord}`,
           {
             signal,
           },
@@ -45,7 +45,7 @@ function App() {
     fetchDictionary();
 
     return () => controller.abort();
-  }, [wordSearch]);
+  }, [searchWord]);
 
   const { word, phonetic, meanings, sourceUrls } = data;
 
@@ -55,8 +55,8 @@ function App() {
         <input
           className="w-full rounded-xl bg-slate-100 p-4 outline-none"
           placeholder="Search from dictionary..."
-          value={wordSearch}
-          onChange={(e) => setWordSearch(e.target.value)}
+          ref={searchWord}
+    
         />
       </section>
 
